@@ -1,0 +1,66 @@
+server:
+    port: 9000
+
+spring:
+    profiles:
+        active: prd
+    application:
+        name: joylink-os
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT+8
+        default-property-inclusion: non_null
+    datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        # 使用druid数据源
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+
+mybatis:
+    config-locations: classpath:mybatis/mybatis-config.xml
+    mapper-locations: classpath:mybatis/mapper/**/*.xml
+
+wechat:
+#    app-id: wx41cb66db5faf330f
+#    app-secret: eb7199c1e73417be6a4d38b4a848effb
+    app-id: wxee60822510e29830
+    app-secret: fa7945e1980d4ff7f03814978f016a83
+    domain-uri: https://api.weixin.qq.com
+    client-login-url: https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wechat.app-id}&redirect_uri=http://58.87.66.250:9527/wx/login&response_type=code&scope=snsapi_base&state=%s#wechat_redirect
+
+tencent-cloud:
+    app-id: 1400093601
+    app-key: 4a724df65b2bb7e4dc9b4302693f2485
+    domain-uri: https://yun.tim.qq.com/v5/tlssmssvr
+    vdcode-tpl: 123003
+    
+---
+spring:
+    profiles: dev
+    datasource:
+        url: jdbc:mysql://localhost:3306/joylink?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+        username: root
+        password: root
+logging:
+    path: /logs/wxservice
+    
+---
+spring:
+    profiles: prd
+    datasource:
+        url: jdbc:mysql://172.21.0.15:3306/joylink?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+        username: root
+        password: joylink@0503
+logging:
+    path: /data/part1/logs/wxservice
