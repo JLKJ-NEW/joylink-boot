@@ -6,7 +6,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'ls'
+                sh 'cd joylink-userms'
                 sh 'mvn -version'
                 sh 'mvn clean package -Dmaven.test.skip=true'
             }
