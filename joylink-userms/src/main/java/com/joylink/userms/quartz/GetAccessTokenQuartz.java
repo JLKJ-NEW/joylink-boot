@@ -30,7 +30,6 @@ public class GetAccessTokenQuartz extends QuartzJobBean {
      */
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-    	if(true) return;
         WxAccessToken wxAt = restTemplate.getForEntity(weChatConfig.getAccessTokenUrl(), WxAccessToken.class).getBody();
         if(StringUtils.isEmpty(wxAt.getAccess_token())) {
         	log.error(String.format("获取access_token任务失败: errcode=%d, errmsg=%s", wxAt.getErrcode(), wxAt.getErrmsg()));

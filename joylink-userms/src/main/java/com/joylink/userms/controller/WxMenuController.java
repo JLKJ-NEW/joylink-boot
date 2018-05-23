@@ -28,7 +28,7 @@ public class WxMenuController {
 	@PostMapping(path="/create")
 	public CommonJsonResponse createWxmenu(@RequestBody String menuJson) {
 		WxBaseResp body = restTemplate.postForObject(weChatConfig.getMenuCreateUrl(), menuJson, WxBaseResp.class,
-						WxAccessTokenCache.getWxAccessToken().getAccess_token());
+						WxAccessTokenCache.getWxAccessTokenString());
 		log.info("创建菜单返回结果: "+body.toString());
 		return CommonJsonResponse.newSuccessResponse(body);
 	}

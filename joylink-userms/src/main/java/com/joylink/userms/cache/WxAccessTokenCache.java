@@ -24,4 +24,13 @@ public class WxAccessTokenCache {
 		return (WxAccessToken) LocalCache.get(WxConstants.ACCESS_TOKEN);
 	}
 	
+	public synchronized static String getWxAccessTokenString() {
+		WxAccessToken wat = (WxAccessToken) LocalCache.get(WxConstants.ACCESS_TOKEN);
+		if(null != wat) {
+			return wat.getAccess_token();
+		} else {
+			return null;
+		}
+	}
+	
 }

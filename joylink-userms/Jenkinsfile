@@ -7,16 +7,14 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'mvn -version'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
+                sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh 'java -version'
+                sh 'java -jar target/*.jar'
             }
         }
     }
