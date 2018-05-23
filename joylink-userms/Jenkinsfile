@@ -6,17 +6,18 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'cd joylink-userms'
-                sh 'ls'
-                sh 'mvn -version'
-                sh 'mvn clean package -Dmaven.test.skip=true'
+                sh '''
+                	cd joylink-userms
+                	ls
+                	mvn clean package -Dmaven.test.skip=true
+                	'''
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
                 sh 'java -version'
-                sh 'java -jar target/*.jar'
+                sh 'java -jar joylink-userms/target/*.jar'
             }
         }
     }
